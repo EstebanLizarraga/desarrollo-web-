@@ -1,0 +1,22 @@
+ 	<!DOCTYPE html>
+<html>
+ <head>
+ 	<title>drawImage</title>
+ </head>
+ <body>
+ 	<div >
+ 	   <canvas id="canvas" width="1000" height="562"></canvas>
+    
+
+ 	</div>
+ 	<script type="text/javascript">
+      var canvas = document.getElementById("canvas");
+      if (canvas.getContext) {
+        var ctx = canvas.getContext("2d");
+           ctx.moveTo(0, 0);
+           ctx.lineTo(200, 100);
+           ctx.stroke(); 
+        }
+  </script>
+ </body>
+</html>
