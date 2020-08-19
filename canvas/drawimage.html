@@ -1,23 +1,24 @@
-
  	<!DOCTYPE html>
 <html>
  <head>
- 
+ 	
  </head>
  <body>
  	<div >
  	   <canvas id="canvas" width="1000" height="562"></canvas>
-    
+ 	      <img id="imagen" style="visibility: hidden;" src="shrek.jpg">
+   
 
  	</div>
  	<script type="text/javascript">
       var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
-        ctx.fillStyle = "#FFBD16";
-      	ctx.fillRect(100, 100, 50, 50);
-      	 ctx.fillStyle = "black";
-      	ctx.fillRect(125, 125, 50, 50);
+          window.onload = function(){
+          var img = document.getElementById("imagen");
+          ctx.drawImage(img, 10, 0)
+        }
           
+                 
   </script>
  </body>
 </html>

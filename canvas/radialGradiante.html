@@ -1,8 +1,7 @@
-
  	<!DOCTYPE html>
 <html>
  <head>
- 
+ 	
  </head>
  <body>
  	<div >
@@ -13,11 +12,14 @@
  	<script type="text/javascript">
       var canvas = document.getElementById("canvas");
         var ctx = canvas.getContext("2d");
-        ctx.fillStyle = "#FFBD16";
-      	ctx.fillRect(100, 100, 50, 50);
-      	 ctx.fillStyle = "black";
-      	ctx.fillRect(125, 125, 50, 50);
-          
+        
+                 var grd = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
+                 grd.addColorStop(0, "red");
+                 grd.addColorStop(1, "white");
+
+                 ctx.fillStyle = grd;
+                 ctx.fillRect(10, 10, 150, 80);
+                 
   </script>
  </body>
 </html>

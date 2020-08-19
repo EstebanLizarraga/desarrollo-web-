@@ -1,0 +1,23 @@
+ 	<!DOCTYPE html>
+<html>
+ <head>
+ 	
+ </head>
+ <body>
+ 	<div >
+ 	   <canvas id="canvas" width="1000" height="562"></canvas>
+ 	     
+ 	</div>
+ 	<script type="text/javascript">
+      var canvas = document.getElementById("canvas");
+      var ctx = canvas.getContext("2d");
+      canvas.addEventListener("click", function(evt){
+	       ctx.fillStyle = "red";
+          ctx.beginPath();
+          ctx.arc(evt.layerX, evt.layerY, 10, 0, 2* Math.PI);
+          ctx.fill();
+        });
+          
+                 
+  </script>
+ </body>
