@@ -1,0 +1,75 @@
+ 	<!DOCTYPE html>
+<html>
+ <head>
+ 	
+ </head>
+ <body>
+ 	<div >
+ 	   <canvas id="canvas" width="1700" height="1200"></canvas>
+ 	  
+
+ 	</div>
+ 	<script type="text/javascript">
+      var canvas = document.getElementById("canvas");
+      var ctx = canvas.getContext("2d");
+
+       window.onload = function(){
+        //cielo
+        ctx.fillStyle = "#0AFFF0";
+       ctx.fillRect(0, 0,1800, 680);
+
+         //suelo 
+       ctx.fillStyle = "#16F70C";
+       ctx.fillRect(0, 490,1800, 200);
+
+        ctx.fillStyle = "#F79E0C";
+       ctx.fillRect(30, 280,230, 240);
+  // techo
+    ctx.fillStyle="rgb(255,0,0)";
+    ctx.lineWidth=5;
+    ctx.beginPath();
+    ctx.moveTo(150,10);
+    ctx.lineTo(10,290);
+    ctx.lineTo(290,290);    
+    ctx.lineTo(150,10);
+    ctx.fill();
+    ctx.stroke();  
+
+
+
+    //puerta 
+
+     ctx.fillStyle = "#7F550F";
+    ctx.fillRect(90, 400,60, 120);
+
+    //manija
+    ctx.beginPath();
+    ctx.arc(140,460,5,0,Math.PI*2);
+    ctx.stroke();
+
+
+    //tronco 
+
+    ctx.fillStyle = "#7F550F";
+    ctx.fillRect(800, 400,60, 120);
+
+    ctx.arc(830,240,160,0,(Math.PI/180)*360,true);
+    ctx.fillStyle="green";
+     ctx.fill();
+
+
+
+
+
+
+
+
+
+
+        }
+           
+
+                 
+  </script>
+ </body>
+</html>
