@@ -1,0 +1,87 @@
+ 	<!DOCTYPE html>
+<html>
+ <head>
+ 	
+ </head>
+ <body>
+ 	<div >
+ 	   <canvas id="canvas" width="1700" height="1200"></canvas>
+ 	    <img id="imagen" style="visibility: hidden;" src="fondo.png">
+    
+
+ 	</div>
+ 	<script type="text/javascript">
+      var canvas = document.getElementById("canvas");
+      var ctx = canvas.getContext("2d");
+
+       window.onload = function(){
+
+
+
+          var img = document.getElementById("imagen");
+          ctx.drawImage(img, 10, 0)
+
+           //cabeza
+       ctx.fillStyle = "#FCF6CB";
+       ctx.fillRect(800, 100, 200, 200);
+       //ojos
+       ctx.fillStyle = "white";
+       ctx.fillRect(830, 150, 40, 50);
+       ctx.fillStyle = "white";
+       ctx.fillRect(930, 150, 40, 50);
+
+       //pupilas 
+
+       ctx.beginPath();
+       ctx.fillStyle = "blue";
+       ctx.arc(850,170,10,0,Math.PI*2);
+       ctx.fill();
+       ctx.stroke();
+
+        ctx.beginPath();
+       ctx.fillStyle = "blue";
+       ctx.arc(950,170,10,0,Math.PI*2);
+       ctx.fill();
+       ctx.stroke();
+
+       //pelo
+       ctx.fillStyle = "#AF7106";
+       ctx.fillRect(780, 60, 250, 80);
+
+       // boca 
+        
+       ctx.fillStyle = "black";
+       ctx.fillRect(850, 240, 100, 50); 
+
+        ctx.fillStyle = "white";
+       ctx.fillRect(850, 240, 100, 20); 
+
+       //cuello
+
+        ctx.fillStyle = "#FCF6CB";
+       ctx.fillRect(850, 290, 100, 40);
+           //cuerpo
+       ctx.fillStyle = "#12D3E6";
+       ctx.fillRect(800, 330, 200, 300);
+
+       //brazo izquierdo 
+           
+       ctx.fillStyle = "#FCF6CB";
+       ctx.fillRect(750, 330, 50,290);
+
+       //brazo derecho           
+       ctx.fillStyle = "#FCF6CB";
+       ctx.fillRect(1000, 330, 50,290);
+
+       // abajo
+
+       ctx.fillStyle = "black";
+       ctx.fillRect(800, 630, 200, 300);
+
+        }
+           
+
+                 
+  </script>
+ </body>
+</html>
