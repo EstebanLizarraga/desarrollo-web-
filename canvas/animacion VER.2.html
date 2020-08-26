@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	
 	<title>Canvas</title>
 	<style type="text/css">
 		.content{
@@ -24,9 +25,13 @@
 
 	</div>
 	<script type="text/javascript">
+		
 		var canvas = null, ctx = null, x = 0, y = 0;
-		var lastPress = 65, speed = 5, player = null, food =null;
+		var lastPress = 65, speed = 3, player = null, food =null;
 		var score=0;
+		walls = [];
+		var final =5;
+
 
 		window.requestAnimationFrame = (function(){
 			return window.requestAnimationFrame || 
@@ -43,24 +48,70 @@
 			ctx.fillStyle = "black";
 			ctx.fillRect(0,0,canvas.width,canvas.height)
 
+
 			ctx.fillStyle = "#0f0";
 			player.paint(ctx);
 
 			ctx.fillStyle = "red";
 			food.paint(ctx);
-
-			// ctx.fillStyle = "#0f0";
-			// ctx.fillRect(x,y,10,10);
+           
+          
+            ctx.fillStyle = "gray";
+            for (var i = walls.length - 1; i >= 0; i--) {
+            
+                walls[i].paint(ctx);
+            }
+			
 		}
-		function drawScore(){
 
-        
+
+
+		function drawScore(){
+		ctx.fillStyle = " red ";
 		ctx.font = "40px Arial";
          ctx.fillText(score,750,40);
 		}
 
+
+		function drawpause(){
+
+       // console.log(" pausa"); 
+		ctx.fillStyle = "white";
+		ctx.font = "100px Arial";
+		ctx.fillText(" pausa", 250,280);
+		ctx.fill();
+		ctx.stroke();
+
+
+		ctx.fillStyle = "white";
+		ctx.font = "40px Arial";
+		ctx.fillText(" preciona enter para regresar", 150,330);
+		ctx.fill();
+		ctx.stroke();
+       
+		}
+
+
+		function drawEnd(){
+
+       // console.log(" pausa"); 
+		ctx.fillStyle = "white";
+		ctx.font = "70px Arial";
+		ctx.fillText(" FIN DEL JUEGO", 150,280);
+		ctx.fill();
+		ctx.stroke();
+	    speed = 0;
+
+		}
+
+
+	
+
+		
+
 		function act(){
- 
+
+           
 
 			if(lastPress==65 || lastPress == 37){ //izquierda
 				player.x -= speed;
@@ -97,6 +148,12 @@
 				food.x = random(canvas.width);
 				food.y = random(canvas.height);
 			}
+			if(lastPress == 32 ){
+              drawpause();
+		      }
+
+
+		   
 		}
 
 		function run(){
@@ -104,7 +161,20 @@
 			act();
 			paint(ctx);
 			drawScore(ctx);
-		}
+
+
+
+			if(speed !=3 && final ==5){
+                drawpause(ctx);
+
+			}
+
+			if(final !=5){
+                drawEnd();
+
+			}
+			
+					}
 
 		function init(){
 			canvas = document.getElementById('canvas');
@@ -113,6 +183,10 @@
 			player = new Rectangle(0,0,10,10);
 			food = new Rectangle(70,50,10,10);
 
+			walls.push(new Rectangle(80,40,20,20));
+		    walls.push(new Rectangle(80,240,20,20));
+		    walls.push(new Rectangle(400,40,20,20));
+		  
 			run();
 		} 
 		
@@ -120,8 +194,32 @@
 		
 		document.addEventListener('keydown',function(e){ 
 			if(e.keyCode==65 || e.keyCode ==  37 || e.keyCode ==  68 || e.keyCode ==  39 || e.keyCode ==  87 || e.keyCode ==  38 || e.keyCode ==  83 || e.keyCode ==  40 )
-				lastPress = e.keyCode; 
+				lastPress = e.keyCode;
+				//console.log(e.keyCode); 
 		})
+
+          // pausa
+	    document.addEventListener('keydown',function(e){ 
+			if(e.keyCode == 32){
+              // alert(" Pausa precione enter para continuar");
+              lastPress = 32;
+				speed =0;
+				
+			}
+		})
+
+		//regresar 
+		document.addEventListener('keydown',function(e){ 
+			if(e.keyCode == 13){
+
+				speed =3;
+			}
+		})
+
+		
+
+
+	
 
 		function Rectangle(x,y,w,h){
 			this.x = x;
@@ -130,9 +228,36 @@
 			this.h = h;
 
 			this.paint = function(ctx){
+				
 
 				ctx.fillRect(this.x,this.y,this.w,this.h);
-			}
+
+              if(player.x > 80+20 || player.x+player.w <80 || player.y>40+20 || player.y+player.h < 40  ){
+                	
+                }else{
+                   final = 0;
+                } 
+                // colision 2 
+
+               if(player.x > 80+20 || player.x+player.w <80 || player.y>240+20 || player.y+player.h < 240  ){
+                	
+                }else{
+                	final = 0;
+                } 
+                // colision 3 
+                if(player.x > 400+20 || player.x+player.w <400 || player.y>40+20 || player.y+player.h < 40  ){
+                	
+                }else{
+                	final = 0;
+                } 
+
+
+
+
+
+            }
+
+			
 
 			this.intersects = function(rect){
 				if (this.x < rect.x + rect.w && this.x + this.w > rect.x && 
