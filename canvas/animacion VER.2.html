@@ -1,6 +1,10 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
+
+	
 	
 	<title>Canvas</title>
 	<style type="text/css">
@@ -31,6 +35,12 @@
 		var score=0;
 		walls = [];
 		var final =5;
+		var body = new Image();
+		var apple = new Image();
+		var eat = new Audio();
+		var end = new Audio();
+		var pause = new Audio();
+
 
 
 		window.requestAnimationFrame = (function(){
@@ -45,15 +55,17 @@
 		function paint(ctx)
 		{
 			
-			ctx.fillStyle = "black";
+			ctx.fillStyle = "green";
 			ctx.fillRect(0,0,canvas.width,canvas.height)
 
 
 			ctx.fillStyle = "#0f0";
-			player.paint(ctx);
+			//player.paint(ctx);
+			ctx.drawImage(body,player.x,player.y);
 
 			ctx.fillStyle = "red";
-			food.paint(ctx);
+			//food.paint(ctx);
+			ctx.drawImage(apple,food.x,food.y);
            
           
             ctx.fillStyle = "gray";
@@ -74,7 +86,7 @@
 
 
 		function drawpause(){
-
+          pause.play();
        // console.log(" pausa"); 
 		ctx.fillStyle = "white";
 		ctx.font = "100px Arial";
@@ -94,13 +106,15 @@
 
 		function drawEnd(){
 
-       // console.log(" pausa"); 
+       // console.log(" pausa");
+       end.play(); 
 		ctx.fillStyle = "white";
 		ctx.font = "70px Arial";
 		ctx.fillText(" FIN DEL JUEGO", 150,280);
 		ctx.fill();
 		ctx.stroke();
 	    speed = 0;
+	   
 
 		}
 
@@ -142,7 +156,7 @@
 			} 
 
 			if(player.intersects(food)){
-                
+                eat.play();
                 score++;
                 drawScore();
 				food.x = random(canvas.width);
@@ -159,6 +173,7 @@
 		function run(){
 			window.requestAnimationFrame(run);
 			act();
+
 			paint(ctx);
 			drawScore(ctx);
 
@@ -171,14 +186,30 @@
 
 			if(final !=5){
                 drawEnd();
-
+                 setTimeout('restar()',3000);
+               
 			}
+
+		}	
 			
-					}
+		function restar(){
+			speed =3;
+			final =5;
+
+			player.x =0;
+			player.y =0;
+
+			food.x = 50;
+			food.y = 20;
+		  }		
+			
 
 		function init(){
 			canvas = document.getElementById('canvas');
 			ctx = canvas.getContext('2d');
+
+			body.src = "gusano.PNG";
+			apple.src = "fruta.PNG";
 
 			player = new Rectangle(0,0,10,10);
 			food = new Rectangle(70,50,10,10);
@@ -186,6 +217,10 @@
 			walls.push(new Rectangle(80,40,20,20));
 		    walls.push(new Rectangle(80,240,20,20));
 		    walls.push(new Rectangle(400,40,20,20));
+		    
+		    eat.src = "comer.mp3";
+		    end.src = "fatality.mp3";
+		    pause.src = "pause.mp3";
 		  
 			run();
 		} 
@@ -211,7 +246,7 @@
 		//regresar 
 		document.addEventListener('keydown',function(e){ 
 			if(e.keyCode == 13){
-
+              
 				speed =3;
 			}
 		})
