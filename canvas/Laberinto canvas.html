@@ -117,6 +117,17 @@
 
 		}
 
+		function restar(){
+			speed =1;
+			final =5;
+
+			player.x =0;
+			player.y =0;
+
+			
+		  }		
+			
+
 
 	
 
@@ -162,9 +173,7 @@
 				salida = salida +1;
 				   
 			}
-			if(lastPress == 32 ){
-
-               		      }
+			
 
 
 		   
@@ -174,18 +183,15 @@
 			window.requestAnimationFrame(run);
 			act();
 			paint(ctx);
-			drawScore(ctx);
 
-			if (lastPress == 32){
-
-				drawpause();
-			}
+			
 			if( salida != 0){
 				drawEnd();
 			} 
 			if(final != 5 ){
-				speed = 0;
-			
+				restar();
+
+
 			}
 
              
@@ -193,24 +199,15 @@
 
 		}	
 			
-		function restar(){
-			speed =1;
-			final =5;
-
-			player.x =0;
-			player.y =0;
-
-			food.x = 50;
-			food.y = 20;
-		  }		
+		
 			
 
 		function init(){
 			canvas = document.getElementById('canvas');
 			ctx = canvas.getContext('2d');
 
-			body.src = "gusano.PNG";
-			apple.src = "fruta.PNG";
+			body.src = "carro.PNG";
+			apple.src = "hotel.PNG";
 
 			player = new Rectangle(0,0,10,10);
 			food = new Rectangle(750,550,10,10);
@@ -235,11 +232,11 @@
 		    walls.push(new Rectangle(600,280,5,135));
 		    walls.push(new Rectangle(650,410,40,5));
 		    walls.push(new Rectangle(690,410,5,130));
+            walls.push(new Rectangle(650,315,80,5));
 
+             walls.push(new Rectangle(650,320,5,60));
 
-		    eat.src = "comer.mp3";
-		    end.src = "fatality.mp3";
-		    pause.src = "pause.mp3";
+		   
 		  
 			run();
 		} 
@@ -249,6 +246,8 @@
 		document.addEventListener('keydown',function(e){ 
 			if(e.keyCode==65 || e.keyCode ==  37 || e.keyCode ==  68 || e.keyCode ==  39 || e.keyCode ==  87 || e.keyCode ==  38 || e.keyCode ==  83 || e.keyCode ==  40 )
 				lastPress = e.keyCode;
+
+
 				//console.log(e.keyCode); 
 		})
 
@@ -388,6 +387,11 @@
                 }else{
                    final = 0;
                 } 
+              if(player.x > 650+80 || player.x+player.w <650 || player.y>315+5 || player.y+player.h < 315  ){
+                	
+                }else{
+                   final = 0;
+                }  
   
 
             }
@@ -411,7 +415,6 @@
 	</script>
 </body>
 </html>
-
 
 
 
