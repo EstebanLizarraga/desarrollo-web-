@@ -35,11 +35,11 @@
 		var final =5;
 		var body = new Image();
 		var apple = new Image();
-		var eat = new Audio();
-		var end = new Audio();
+		
 		var pause = new Audio();
 		var salida = 0;
 		var pausar = 0;
+		var theme = new Audio();
 
 
 
@@ -55,6 +55,7 @@
 		function paint(ctx)
 		{
 			
+		     
 			ctx.fillStyle = "white";
 			ctx.fillRect(0,0,canvas.width,canvas.height)
 
@@ -87,7 +88,7 @@
 
 		function drawpause(){
         
-       console.log(" pausa"); 
+     
 		ctx.fillStyle = "red";
 		ctx.font = "160px Arial";
 		ctx.fillText(" pausa", 150,280);
@@ -120,6 +121,7 @@
 		function restar(){
 			speed =1;
 			final =5;
+			salida = 0;
 
 			player.x =0;
 			player.y =0;
@@ -136,7 +138,11 @@
 		function act(){
 
            
-
+             if(lastPress != 0){
+            
+           	theme.play();
+           
+             }
 			if(lastPress==65 || lastPress == 37){ //izquierda
 				player.x -= speed;
 				if (player.x < 0 ) {
@@ -168,10 +174,22 @@
 				}
 			} 
 
+			if( lastPress ==32){
+				drawpause();
+			}
+
 			if(player.intersects(food)){
 				 
 				salida = salida +1;
 				   
+			}
+
+			for (var i = walls.length - 1; i >= 0; i--) {
+				if (player.intersects(walls[i])) {
+					
+					console.log( "choco");
+					final = 0;
+				}
 			}
 			
 
@@ -183,10 +201,11 @@
 			window.requestAnimationFrame(run);
 			act();
 			paint(ctx);
-
+             
 			
 			if( salida != 0){
-				drawEnd();
+             drawEnd();
+		     setTimeout('restar()',3000);
 			} 
 			if(final != 5 ){
 				restar();
@@ -206,8 +225,10 @@
 			canvas = document.getElementById('canvas');
 			ctx = canvas.getContext('2d');
 
-			body.src = "carro.PNG";
-			apple.src = "hotel.PNG";
+			body.src = "at.PNG";
+			apple.src = "star.PNG";
+			 
+
 
 			player = new Rectangle(0,0,10,10);
 			food = new Rectangle(750,550,10,10);
@@ -233,11 +254,84 @@
 		    walls.push(new Rectangle(650,410,40,5));
 		    walls.push(new Rectangle(690,410,5,130));
             walls.push(new Rectangle(650,315,80,5));
+            walls.push(new Rectangle(650,320,5,60));
 
-             walls.push(new Rectangle(650,320,5,60));
+             walls.push(new Rectangle(125,115,150,5));
+             walls.push(new Rectangle(125,150,100,5));
+             walls.push(new Rectangle(180,190,5,60));
+             walls.push(new Rectangle(180,190,5,60));
+             walls.push(new Rectangle(180,290,5,250));
+             walls.push(new Rectangle(120,290,60,5));
+             walls.push(new Rectangle(120,250,65,5));
+             walls.push(new Rectangle(115,290,5,60));
+             walls.push(new Rectangle(115,290,5,260));
+             walls.push(new Rectangle(220,150,5,105));
+             walls.push(new Rectangle(220,250,60,5));
+             walls.push(new Rectangle(220,290,5,250));
+             walls.push(new Rectangle(260,290,5,250));
+             walls.push(new Rectangle(260,290,5,250));
+             walls.push(new Rectangle(260,290,105,5));
+             walls.push(new Rectangle(260,390,105,5));
+             walls.push(new Rectangle(360,390,5,105));
+             walls.push(new Rectangle(310,440,5,140));
+             walls.push(new Rectangle(360,490,80,5));
+             walls.push(new Rectangle(360,540,80,5));
+             walls.push(new Rectangle(400,540,5,40));
+             walls.push(new Rectangle(440,410,5,85));
+             walls.push(new Rectangle(440,410,80,5));
+             walls.push(new Rectangle(480,465,5,80));
+             walls.push(new Rectangle(520,410,5,80));
+             walls.push(new Rectangle(520,490,135,5));
+             walls.push(new Rectangle(480,525,210,5));
+             walls.push(new Rectangle(540,555,5,25));
+             walls.push(new Rectangle(540,555,5,25));
+             walls.push(new Rectangle(580,525,5,25));
+             walls.push(new Rectangle(640,545,5,35));
+             walls.push(new Rectangle(650,450,5,40));
+             walls.push(new Rectangle(600,450,50,5));
+             walls.push(new Rectangle(600,450,50,5));
+             walls.push(new Rectangle(200,540,5,5));
+             walls.push(new Rectangle(240,540,5,5));
+             walls.push(new Rectangle(270,120,5,50));
+             walls.push(new Rectangle(270,170,80,5));
+             walls.push(new Rectangle(320,170,5,80));
+             walls.push(new Rectangle(380,120,5,130));
+             walls.push(new Rectangle(380,120,120,5));
+             walls.push(new Rectangle(540,120,85,5));
+             walls.push(new Rectangle(425,160,120,5));
+             walls.push(new Rectangle(425,160,5,20));
+             walls.push(new Rectangle(540,120,5,40));
+             walls.push(new Rectangle(380,210,300,5));
+             walls.push(new Rectangle(580,190,10,10));
+             walls.push(new Rectangle(600,170,10,10));
+             walls.push(new Rectangle(620,150,10,10));
+             walls.push(new Rectangle(470,225,10,10));
+             walls.push(new Rectangle(470,245,10,10));
+             walls.push(new Rectangle(470,265,10,10));
+             walls.push(new Rectangle(410,290,190,5));
+             walls.push(new Rectangle(410,290,5,60));
+             walls.push(new Rectangle(360,290,5,85));
+             walls.push(new Rectangle(360,370,180,5));
+             walls.push(new Rectangle(410,345,160,5));
+             walls.push(new Rectangle(540,370,5,80));
+             walls.push(new Rectangle(540,450,90,5));
+             walls.push(new Rectangle(570,345,5,80));
+             walls.push(new Rectangle(570,420,30,5));
+             walls.push(new Rectangle(620,425,10,10));
+             walls.push(new Rectangle(730,538,100,5));
+             walls.push(new Rectangle(794,538,5,45));
+             walls.push(new Rectangle(730,580,100,5));
+             walls.push(new Rectangle(340,118,5,55));
+            
 
-		   
-		  
+        
+
+
+		
+		   theme.src = "bh.mp3";
+            
+
+
 			run();
 		} 
 		
@@ -256,6 +350,7 @@
 			if(e.keyCode == 32){
               lastPress = 32;
 				speed =0;
+				
 				
 			}
 		})
@@ -278,10 +373,10 @@
 			this.h = h;
 
 			this.paint = function(ctx){
+			
 
 				  
 			
-
 				ctx.fillRect(this.x,this.y,this.w,this.h);
                // linea supperior 
               if(player.x > 680+40 || player.x+player.w <80 || player.y>40+5 || player.y+player.h < 40  ){
@@ -313,85 +408,7 @@
 
                // zona de paredes 
 
-              if(player.x > 120+5 || player.x+player.w <120 || player.y>41+40 || player.y+player.h < 41  ){
-                	
-                }else{
-                   final = 0;
-                }
-
-              if(player.x > 120+500 || player.x+player.w <120 || player.y>80+5 || player.y+player.h < 80  ){
-                	
-                }else{
-                   final = 0;
-                } 
-
-
-               if(player.x > 120+500 || player.x+player.w <120 || player.y>80+5 || player.y+player.h < 80  ){
-                	
-                }else{
-                   final = 0;
-                } 
-
-               if(player.x > 120+5 || player.x+player.w <120 || player.y>40+115 || player.y+player.h < 115  ){
-                	
-                }else{
-                   final = 0;
-                }   
-
-               if(player.x > 80+100 || player.x+player.w <80 || player.y>190+5 || player.y+player.h < 190  ){
-                	
-                }else{
-                   final = 0;
-                }       
-
-               if(player.x > 620+5 || player.x+player.w <620 || player.y>80+40 || player.y+player.h < 80  ){
-                	
-                }else{
-                   final = 0;
-                }
-                 if(player.x > 660+5 || player.x+player.w <660 || player.y>80+40 || player.y+player.h < 80  ){
-                	
-                }else{
-                   final = 0;
-                } 
-
-                if(player.x > 660+40 || player.x+player.w <660 || player.y>80+5 || player.y+player.h < 80  ){
-                	
-                }else{
-                   final = 0;
-                }  
-              
-                if(player.x > 700+5 || player.x+player.w <700 || player.y>80+200 || player.y+player.h < 80  ){
-                	
-                }else{
-                   final = 0;
-                }  
-                 
-                if(player.x > 600+105 || player.x+player.w <600 || player.y>280+5 || player.y+player.h < 280  ){
-                	
-                }else{
-                   final = 0;
-                }   
-                if(player.x > 600+5 || player.x+player.w <600 || player.y>280+135 || player.y+player.h < 280  ){
-                	
-                }else{
-                   final = 0;
-                }   
-                if(player.x > 650+40 || player.x+player.w <650 || player.y>410+5 || player.y+player.h < 410  ){
-                	
-                }else{
-                   final = 0;
-                } 
-		      if(player.x > 690+5 || player.x+player.w <690 || player.y>410+130 || player.y+player.h < 410  ){
-                	
-                }else{
-                   final = 0;
-                } 
-              if(player.x > 650+80 || player.x+player.w <650 || player.y>315+5 || player.y+player.h < 315  ){
-                	
-                }else{
-                   final = 0;
-                }  
+                                                  
   
 
             }
@@ -415,6 +432,9 @@
 	</script>
 </body>
 </html>
+
+
+
 
 
 
