@@ -1,0 +1,91 @@
+<?php
+	//$info = file_get_contents("https://jsonplaceholder.typicode.com/todos/"); 
+	$info = 0;
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Clase</title>
+	<style type="text/css">
+		.super_div{
+			width: 100%;
+			height: 50px;
+			background-color: #D5D8DC;
+		}
+		.mini_div{
+			width: 30%;
+			margin: 1%;
+			border-radius: 5px;
+			border-width: 1px;
+			border-style: solid;
+			border-color: black;
+			height: 300px;
+			float: left;
+		}
+		.patito{
+			border-color: lightcoral;
+		}
+		.otra_clase{
+			background-color: purple !important;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="super_div">
+	
+
+				<button id="button_2" >
+				Click me 
+			   </button>
+
+		
+	
+
+	</div>
+
+	 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+            $.get('contenido.html',function(r){
+ 			
+ 			       }) 
+            
+ 			$("#button_2").click(function(){
+
+ 					$.get('contenido.html',function(r){
+ 				$(".super_div").append(r);
+ 			       }) 
+
+ 				var response;
+	 			$.ajax({ 
+				   
+				    data : { }, 
+				    type : 'GET', 
+				    dataType : 'text', 
+				    success : function(r) {
+				    
+				        console.log(r)  
+				    }, 
+				    error : function(xhr, status) {
+				        console.log(xhr)
+				        console.log(status)
+				    }, 
+				    complete : function(xhr, status) {
+				        // console.log(xhr)
+				        // console.log(status)
+				    }
+				});
+	 			
+
+ 			})
+ 			
+
+ 		}) 
+             
+          
+	</script>
+
+</body>
+</html>
