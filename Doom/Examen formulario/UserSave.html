@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta charset="UTF-8">
+	<title>Clase</title>
+	<style type="text/css">
+        
+
+       input:invalid {
+       border: 2px dashed red;
+        }
+     
+      input:valid {
+       border: 2px solid black;
+      }
+
+
+         table {
+         width: 100%;
+         border: 1px solid #000;
+         }
+          th, td {
+            width: 25%;
+            text-align: center;
+            vertical-align: top;
+            border: 1px solid #000;
+            background: #fff;
+            color: #000;
+          }
+		 .guardar{
+          text-decoration: none;
+          padding: 10px;
+          font-weight: 600;
+          font-size: 20px;
+          color: #ffffff;
+          background-color: gray;
+          border-radius: 6px;
+          border: 2px solid black;
+       }
+       	 .mostrar{
+          text-decoration: none;
+          padding: 10px;
+          font-weight: 600;
+          font-size: 20px;
+          color: #ffffff;
+          background-color: gray;
+          border-radius: 6px;
+          border: 2px solid black;
+       }
+		.super_div{
+			width: all;
+			height: 700px;
+			
+		}
+		.mini_div{
+			width: 30%;
+			margin: 1%;
+			border-radius: 5px;
+			border-width: 1px;
+			border-style: solid;
+			border-color: black;
+			height: 300px;
+			float: left;
+		}
+		h1{
+			text-align: center;
+			color: #ffffff;
+			font-family: "Fantasy";		
+		}
+		h2{
+			text-align: center;
+			color: #ffffff;
+			font-family: "optima";
+		}
+	</style>
+</head>
+<body background="color.jpg"  >
+
+	<div class="super_div">
+	
+		<center>
+			<form id="formulario">
+				<fieldset style="width: 40%;">
+					<legend >
+						<h1 >Datos del usuario</h1>
+					</legend>
+					<h2>Correo</h2>
+
+					<input type="text" style="width: 100%;height: 40px;  text-align: center;" name="email" id="email" value="" placeholder="""   required="">
+
+					<h2>Contraseña</h2>
+
+                    <input type="password" style="width: 100%;height: 40px;  text-align: center;" name="password" id="password" value="" placeholder=""  "       required="">
+
+				
+                    <h2>Año nacimiento</h2>
+                     <input type="number" style="width: 100%;height: 40px;  text-align: center;" name="year" id="year" value="" placeholder=""  " required="">
+					
+
+					<button type="button"  id="guardar" class="guardar"> Guardar </button>
+				</fieldset>
+			</form>
+		<br>
+			<center>
+			<table border="2" style="width: 50%;">
+				<thead>
+					<tr>
+						<td>
+							ID
+						</td>
+						<td>
+							Correo
+						</td>
+						<td>
+							Contraseña
+						</td>
+						<td>
+							Año
+						</td>
+					</tr>
+				</thead>
+				<tbody id="table">
+
+				</tbody>
+			</table>
+			<button id="mostrar"  class="mostrar"> Actualizar </button>
+	</div>
+
+
+  
+
+   <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript">
+
+
+         $(document).ready(function() {
+  		  $("#guardar").click(function(){
+
+  		  	var email = $("#email").val();
+  		  	var	password = $("#password").val();
+  		  	var year = $("#year").val();
+
+  		  	console.log(email)
+  		  	console.log(password)
+  		  	console.log(year)
+
+  		  		$.ajax({
+  		  			url: 'file.php',
+  		  			data: {email : email,
+  		  				   password : password,
+  		  				   year : year},
+  		  			type: 'POST',
+  		  			dataType: 'text',
+  		  			success: function(r){
+  		  				console.log(r)
+  		  				if(r == 1){
+  		  					alert("Se introdujo correctamente los datos")
+  		  				}else{
+  		  					alert("Rellena todos los datos")
+  		  				}
+  		  				
+  		  			}
+  		  		})
+  		  	
+  		  })
+		
+
+  		  $("#mostrar").click(function(){
+
+  		  		$.ajax({
+  		  			url: 'busqueda.php',
+  		  			type: 'POST',
+  		  			dataType: 'text',
+  		  			success: function(r){
+  		  				$('#table').html(r)
+  		  			}
+  		  		})
+  		  	
+  		  })
+
+  		  });
+	 
+
+       
+      
+
+
+         
+	 
+
+          </script>
+</body>
+</html>
